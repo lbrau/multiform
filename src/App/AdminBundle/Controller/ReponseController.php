@@ -7,47 +7,44 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use App\AdminBundle\Entity\HermesUser;
-use App\AdminBundle\Form\HermesUserType;
+use App\AdminBundle\Entity\Reponse;
+use App\AdminBundle\Form\ReponseType;
 
 /**
- * HermesUser controller.
+ * Reponse controller.
  *
- * @Route("/hermesuser")
+ * @Route("/reponse")
  */
-class HermesUserController extends Controller
+class ReponseController extends Controller
 {
 
     /**
-     * Lists all HermesUser entities.
+     * Lists all Reponse entities.
      *
-     * @Route("/", name="users_hermes_list")
+     * @Route("/", name="list_reponses")
      * @Method("GET")
      * @Template()
      */
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $entities = $em->getRepository('AppAdminBundle:HermesUser')->findAll();
-        
-//        $deleteForm = $this->createDeleteForm($id);
+
+        $entities = $em->getRepository('AppAdminBundle:Reponse')->findAll();
 
         return array(
             'entities' => $entities,
-//            'delete_form' => $deleteForm->createView()
         );
     }
-    
     /**
-     * Creates a new HermesUser entity.
+     * Creates a new Reponse entity.
      *
-     * @Route("/", name="hermesuser_create")
+     * @Route("/", name="reponse_create")
      * @Method("POST")
-     * @Template("AppAdminBundle:HermesUser:new.html.twig")
+     * @Template("AppAdminBundle:Reponse:new.html.twig")
      */
     public function createAction(Request $request)
     {
-        $entity = new HermesUser();
+        $entity = new Reponse();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
@@ -56,7 +53,7 @@ class HermesUserController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('hermesuser_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('reponse_show', array('id' => $entity->getId())));
         }
 
         return array(
@@ -66,34 +63,38 @@ class HermesUserController extends Controller
     }
 
     /**
-     * Creates a form to create a HermesUser entity.
+     * Creates a form to create a Reponse entity.
      *
-     * @param HermesUser $entity The entity
+     * @param Reponse $entity The entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(HermesUser $entity)
+    private function createCreateForm(Reponse $entity)
     {
-        $form = $this->createForm(new HermesUserType(), $entity, array(
-            'action' => $this->generateUrl('hermesuser_create'),
+        $form = $this->createForm(new ReponseType(), $entity, array(
+            'action' => $this->generateUrl('reponse_create'),
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', 'submit', array(
+            'label' => 'Create',
+            'attr' => array(
+                'class' => 'btn btn-danger'
+            )));
 
         return $form;
     }
 
     /**
-     * Displays a form to create a new HermesUser entity.
+     * Displays a form to create a new Reponse entity.
      *
-     * @Route("/new", name="hermesuser_new")
+     * @Route("/new", name="reponse_new")
      * @Method("GET")
      * @Template()
      */
     public function newAction()
     {
-        $entity = new HermesUser();
+        $entity = new Reponse();
         $form   = $this->createCreateForm($entity);
 
         return array(
@@ -103,9 +104,9 @@ class HermesUserController extends Controller
     }
 
     /**
-     * Finds and displays a HermesUser entity.
+     * Finds and displays a Reponse entity.
      *
-     * @Route("/{id}", name="hermesuser_show")
+     * @Route("/{id}", name="reponse_show")
      * @Method("GET")
      * @Template()
      */
@@ -113,10 +114,10 @@ class HermesUserController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AppAdminBundle:HermesUser')->find($id);
+        $entity = $em->getRepository('AppAdminBundle:Reponse')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find HermesUser entity.');
+            throw $this->createNotFoundException('Unable to find Reponse entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -128,9 +129,9 @@ class HermesUserController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing HermesUser entity.
+     * Displays a form to edit an existing Reponse entity.
      *
-     * @Route("/{id}/edit", name="hermesuser_edit")
+     * @Route("/{id}/edit", name="reponse_edit")
      * @Method("GET")
      * @Template()
      */
@@ -138,13 +139,13 @@ class HermesUserController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AppAdminBundle:HermesUser')->find($id);
+        $entity = $em->getRepository('AppAdminBundle:Reponse')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find HermesUser entity.');
+            throw $this->createNotFoundException('Unable to find Reponse entity.');
         }
 
-        $editForm   = $this->createEditForm($entity);
+        $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
@@ -155,16 +156,16 @@ class HermesUserController extends Controller
     }
 
     /**
-    * Creates a form to edit a HermesUser entity.
+    * Creates a form to edit a Reponse entity.
     *
-    * @param HermesUser $entity The entity
+    * @param Reponse $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createEditForm(HermesUser $entity)
+    private function createEditForm(Reponse $entity)
     {
-        $form = $this->createForm(new HermesUserType(), $entity, array(
-            'action' => $this->generateUrl('hermesuser_update', array('id' => $entity->getId())),
+        $form = $this->createForm(new ReponseType(), $entity, array(
+            'action' => $this->generateUrl('reponse_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -173,20 +174,20 @@ class HermesUserController extends Controller
         return $form;
     }
     /**
-     * Edits an existing HermesUser entity.
+     * Edits an existing Reponse entity.
      *
-     * @Route("/{id}", name="hermesuser_update")
+     * @Route("/{id}", name="reponse_update")
      * @Method("PUT")
-     * @Template("AppAdminBundle:HermesUser:edit.html.twig")
+     * @Template("AppAdminBundle:Reponse:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AppAdminBundle:HermesUser')->find($id);
+        $entity = $em->getRepository('AppAdminBundle:Reponse')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find HermesUser entity.');
+            throw $this->createNotFoundException('Unable to find Reponse entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -196,7 +197,7 @@ class HermesUserController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('hermesuser_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('reponse_edit', array('id' => $id)));
         }
 
         return array(
@@ -206,9 +207,9 @@ class HermesUserController extends Controller
         );
     }
     /**
-     * Deletes a HermesUser entity.
+     * Deletes a Reponse entity.
      *
-     * @Route("/{id}", name="hermesuser_delete")
+     * @Route("/{id}", name="reponse_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
@@ -218,21 +219,21 @@ class HermesUserController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('AppAdminBundle:HermesUser')->find($id);
+            $entity = $em->getRepository('AppAdminBundle:Reponse')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find HermesUser entity.');
+                throw $this->createNotFoundException('Unable to find Reponse entity.');
             }
 
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('hermesuser'));
+        return $this->redirect($this->generateUrl('reponse'));
     }
 
     /**
-     * Creates a form to delete a HermesUser entity by id.
+     * Creates a form to delete a Reponse entity by id.
      *
      * @param mixed $id The entity id
      *
@@ -241,7 +242,7 @@ class HermesUserController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('hermesuser_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('reponse_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()

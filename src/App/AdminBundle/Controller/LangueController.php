@@ -7,47 +7,44 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use App\AdminBundle\Entity\HermesUser;
-use App\AdminBundle\Form\HermesUserType;
+use App\AdminBundle\Entity\Langue;
+use App\AdminBundle\Form\LangueType;
 
 /**
- * HermesUser controller.
+ * Langue controller.
  *
- * @Route("/hermesuser")
+ * @Route("/langue")
  */
-class HermesUserController extends Controller
+class LangueController extends Controller
 {
 
     /**
-     * Lists all HermesUser entities.
+     * Lists all Langue entities.
      *
-     * @Route("/", name="users_hermes_list")
+     * @Route("/", name="langue")
      * @Method("GET")
      * @Template()
      */
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $entities = $em->getRepository('AppAdminBundle:HermesUser')->findAll();
-        
-//        $deleteForm = $this->createDeleteForm($id);
+
+        $entities = $em->getRepository('AppAdminBundle:Langue')->findAll();
 
         return array(
             'entities' => $entities,
-//            'delete_form' => $deleteForm->createView()
         );
     }
-    
     /**
-     * Creates a new HermesUser entity.
+     * Creates a new Langue entity.
      *
-     * @Route("/", name="hermesuser_create")
+     * @Route("/", name="langue_create")
      * @Method("POST")
-     * @Template("AppAdminBundle:HermesUser:new.html.twig")
+     * @Template("AppAdminBundle:Langue:new.html.twig")
      */
     public function createAction(Request $request)
     {
-        $entity = new HermesUser();
+        $entity = new Langue();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
@@ -56,7 +53,7 @@ class HermesUserController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('hermesuser_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('langue_show', array('id' => $entity->getId())));
         }
 
         return array(
@@ -66,16 +63,16 @@ class HermesUserController extends Controller
     }
 
     /**
-     * Creates a form to create a HermesUser entity.
+     * Creates a form to create a Langue entity.
      *
-     * @param HermesUser $entity The entity
+     * @param Langue $entity The entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(HermesUser $entity)
+    private function createCreateForm(Langue $entity)
     {
-        $form = $this->createForm(new HermesUserType(), $entity, array(
-            'action' => $this->generateUrl('hermesuser_create'),
+        $form = $this->createForm(new LangueType(), $entity, array(
+            'action' => $this->generateUrl('langue_create'),
             'method' => 'POST',
         ));
 
@@ -85,15 +82,15 @@ class HermesUserController extends Controller
     }
 
     /**
-     * Displays a form to create a new HermesUser entity.
+     * Displays a form to create a new Langue entity.
      *
-     * @Route("/new", name="hermesuser_new")
+     * @Route("/new", name="langue_new")
      * @Method("GET")
      * @Template()
      */
     public function newAction()
     {
-        $entity = new HermesUser();
+        $entity = new Langue();
         $form   = $this->createCreateForm($entity);
 
         return array(
@@ -103,9 +100,9 @@ class HermesUserController extends Controller
     }
 
     /**
-     * Finds and displays a HermesUser entity.
+     * Finds and displays a Langue entity.
      *
-     * @Route("/{id}", name="hermesuser_show")
+     * @Route("/{id}", name="langue_show")
      * @Method("GET")
      * @Template()
      */
@@ -113,10 +110,10 @@ class HermesUserController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AppAdminBundle:HermesUser')->find($id);
+        $entity = $em->getRepository('AppAdminBundle:Langue')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find HermesUser entity.');
+            throw $this->createNotFoundException('Unable to find Langue entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -128,9 +125,9 @@ class HermesUserController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing HermesUser entity.
+     * Displays a form to edit an existing Langue entity.
      *
-     * @Route("/{id}/edit", name="hermesuser_edit")
+     * @Route("/{id}/edit", name="langue_edit")
      * @Method("GET")
      * @Template()
      */
@@ -138,13 +135,13 @@ class HermesUserController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AppAdminBundle:HermesUser')->find($id);
+        $entity = $em->getRepository('AppAdminBundle:Langue')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find HermesUser entity.');
+            throw $this->createNotFoundException('Unable to find Langue entity.');
         }
 
-        $editForm   = $this->createEditForm($entity);
+        $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
@@ -155,16 +152,16 @@ class HermesUserController extends Controller
     }
 
     /**
-    * Creates a form to edit a HermesUser entity.
+    * Creates a form to edit a Langue entity.
     *
-    * @param HermesUser $entity The entity
+    * @param Langue $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createEditForm(HermesUser $entity)
+    private function createEditForm(Langue $entity)
     {
-        $form = $this->createForm(new HermesUserType(), $entity, array(
-            'action' => $this->generateUrl('hermesuser_update', array('id' => $entity->getId())),
+        $form = $this->createForm(new LangueType(), $entity, array(
+            'action' => $this->generateUrl('langue_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -173,20 +170,20 @@ class HermesUserController extends Controller
         return $form;
     }
     /**
-     * Edits an existing HermesUser entity.
+     * Edits an existing Langue entity.
      *
-     * @Route("/{id}", name="hermesuser_update")
+     * @Route("/{id}", name="langue_update")
      * @Method("PUT")
-     * @Template("AppAdminBundle:HermesUser:edit.html.twig")
+     * @Template("AppAdminBundle:Langue:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AppAdminBundle:HermesUser')->find($id);
+        $entity = $em->getRepository('AppAdminBundle:Langue')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find HermesUser entity.');
+            throw $this->createNotFoundException('Unable to find Langue entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -196,7 +193,7 @@ class HermesUserController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('hermesuser_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('langue_edit', array('id' => $id)));
         }
 
         return array(
@@ -206,9 +203,9 @@ class HermesUserController extends Controller
         );
     }
     /**
-     * Deletes a HermesUser entity.
+     * Deletes a Langue entity.
      *
-     * @Route("/{id}", name="hermesuser_delete")
+     * @Route("/{id}", name="langue_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
@@ -218,21 +215,21 @@ class HermesUserController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('AppAdminBundle:HermesUser')->find($id);
+            $entity = $em->getRepository('AppAdminBundle:Langue')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find HermesUser entity.');
+                throw $this->createNotFoundException('Unable to find Langue entity.');
             }
 
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('hermesuser'));
+        return $this->redirect($this->generateUrl('langue'));
     }
 
     /**
-     * Creates a form to delete a HermesUser entity by id.
+     * Creates a form to delete a Langue entity by id.
      *
      * @param mixed $id The entity id
      *
@@ -241,7 +238,7 @@ class HermesUserController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('hermesuser_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('langue_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
