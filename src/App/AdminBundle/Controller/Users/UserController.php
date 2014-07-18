@@ -45,10 +45,23 @@ class UserController extends Controller
      */
     public function createAction(Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
         $entity = new User();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
+    /*    
+        $data = $request->get($form->getName(), array());
+        $user  = $em->getRepository('FOSUserBundle:User')->findOneBy(array('email' => $data["email"]));
+        if ($user) {
+           var_dump('HELL');
+            $form->get('email')->addError(new FormError('Cet email est déjà existant'));
+        }
 
+        $user  = $em->getRepository('FOSUserBundle:User')->findOneBy(array('username' => $data["username"]));
+        if ($user) {
+            $form->get('username')->addError(new FormError('Ce nom d\'utilisateur est déjà existant'));
+        }
+*/
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);

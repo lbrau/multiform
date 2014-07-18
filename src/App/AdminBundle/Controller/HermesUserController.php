@@ -79,7 +79,12 @@ class HermesUserController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+         $form->add('submit', 'submit', array(
+            'label' => 'Creer',
+            'attr' => array(
+                'class' => 'btn btn-danger'
+            ), 
+        ));
 
         return $form;
     }
@@ -168,7 +173,12 @@ class HermesUserController extends Controller
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Modifier'));
+         $form->add('submit', 'submit', array(
+            'label' => 'Modifier',
+            'attr' => array(
+                'class' => 'btn btn-danger'
+            ), 
+        ));
 
         return $form;
     }

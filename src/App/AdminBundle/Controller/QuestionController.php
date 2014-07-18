@@ -76,7 +76,12 @@ class QuestionController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+         $form->add('submit', 'submit', array(
+            'label' => 'Creer',
+            'attr' => array(
+                'class' => 'btn btn-danger'
+            ), 
+        ));
 
         return $form;
     }
@@ -165,7 +170,12 @@ class QuestionController extends Controller
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+         $form->add('submit', 'submit', array(
+            'label' => 'Modifier',
+            'attr' => array(
+                'class' => 'btn btn-danger'
+            ), 
+        ));
 
         return $form;
     }
@@ -193,7 +203,7 @@ class QuestionController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('question_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('list_questions', array('id' => $id)));
         }
 
         return array(
@@ -240,7 +250,11 @@ class QuestionController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('question_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', 'submit', array(
+                'label' => 'Delete',
+                'attr'  => array(
+                    'class' => 'btn btn-xs btn-danger'
+                )))
             ->getForm()
         ;
     }

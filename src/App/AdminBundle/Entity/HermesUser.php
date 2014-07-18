@@ -166,4 +166,9 @@ class HermesUser
     {
         return $this->reponses;
     }
+    
+    public function __toString() 
+    {
+       return $this->nom." ".$this->prenom;
+    }
 }

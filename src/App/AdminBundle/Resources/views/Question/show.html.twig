@@ -1,32 +1,50 @@
-{% extends '::base.html.twig' %}
+{% extends 'AppAdminBundle:Layout:admin_layout.html.twig' %}
 
 {% block body -%}
-    <h1>Question</h1>
+   <section class="panel">
+   <div class="panel-body">
+       <a href="#" class="task-thumb">
+           <img src="" alt="">
+       </a>
+       <div class="task-thumb-details">
+           <h1><a href="#">{{ entity.libelle }}</a></h1>
+           <p>Ici seront affichés les roles</p>
+       </div>
+       <div class="align-right">
 
-    <table class="record_properties">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ entity.id }}</td>
-            </tr>
-            <tr>
-                <th>Libelle</th>
-                <td>{{ entity.libelle }}</td>
-            </tr>
-        </tbody>
-    </table>
+          <div class="btn btn-xs btn-danger margin-top">
+               <a href="{{ path('list_questions') }}" class="white-color align-btn">
+                   Back to the list
+               </a>
+           </div>
+           <br>
+           <div class="btn btn-xs btn-danger margin-top">
+               <a href="{{ path('question_edit', { 'id': entity.id }) }}" class="white-color align-btn">
+                   Edit
+               </a>
+           </div>
+           <br>
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('list_questions') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('question_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+          <div class="btn btn-xs btn-danger margin-top">{{ form(delete_form) }}</div>
+       </div>
+   </div>
+   <table class="table table-hover personal-task">
+       <tbody>
+         <tr>
+             <td>
+                 <i class=" fa fa-tasks"></i>
+             </td>
+             <td>Identifiant</td>
+             <td>{{ entity.id }}</td>
+         </tr>
+         <tr>
+             <td>
+                 <i class="fa fa-exclamation-triangle"></i>
+             </td>
+             <td>nom</td>
+             <td>{{ entity.libelle }}</td>
+         </tr>
+       </tbody>
+   </table>
+   </section>
 {% endblock %}

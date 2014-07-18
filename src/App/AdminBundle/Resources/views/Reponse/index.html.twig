@@ -6,7 +6,7 @@
               <!-- page start-->
               <section class="panel">
                   <header class="panel-heading">
-                      Liste des utilisateurs
+                      Liste des réponses
                   </header>
                   <div class="panel-body">
                       <div class="adv-table editable-table">
@@ -49,15 +49,12 @@
                                           {{ auteur.nom }} {{ auteur.prenom }}<br>
                                         {% endfor %}
                                      </td>
-                                     <td>
-                                       <ul>
-                                           <li>
-                                               <a href="{{ path('reponse_show', { 'id': entity.id }) }}">show</a>
-                                           </li>
-                                           <li>
-                                               <a href="{{ path('reponse_edit', { 'id': entity.id }) }}">edit</a>
-                                           </li>
-                                       </ul>
+                                     <td class="center">
+                                        <div class="hidden-phon">
+                                             <a class="btn btn-success btn-sm" href="{{ path('reponse_show', { 'id': entity.id }) }}"><i class="fa fa-eye"></i></a>
+                                             <a class="btn btn-primary btn-sm" href="{{ path('reponse_edit', { 'id': entity.id }) }}"><i class="fa fa-pencil"></i></a>
+                                             <a class="btn btn-danger btn-sm" href="#"><i class="fa fa-trash-o "></i></a>
+                                         </div>
                                      </td>
                                  </tr>
                               {% endfor %}

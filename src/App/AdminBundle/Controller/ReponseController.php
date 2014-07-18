@@ -169,7 +169,12 @@ class ReponseController extends Controller
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', 'submit', array(
+            'label' => 'Modifier',
+            'attr' => array(
+                'class' => 'btn btn-danger'
+            ), 
+        ));
 
         return $form;
     }
@@ -197,7 +202,7 @@ class ReponseController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('reponse_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('list_reponses', array('id' => $id)));
         }
 
         return array(
@@ -244,7 +249,11 @@ class ReponseController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('reponse_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', 'submit', array(
+                'label' => 'Delete',
+                'attr'  => array(
+                    'class' => 'btn btn-xs btn-danger'
+                )))
             ->getForm()
         ;
     }
