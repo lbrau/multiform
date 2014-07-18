@@ -1,0 +1,97 @@
+{% extends 'AppAdminBundle:Layout:admin_layout.html.twig' %}
+
+{% block body -%}
+<section class="panel">
+                          <div class="panel-body">
+                              <a href="#" class="task-thumb">
+                                  <img src="" alt="">
+                              </a>
+                              <div class="task-thumb-details">
+                                  <h1><a href="#">{{ entity.contenu }}</a></h1>
+                                  <p>Edité par {{ entity.usersHermes }}</p>
+                              </div>
+                              <div class="align-right">
+                                 
+                                 <div class="btn btn-xs btn-danger margin-top">
+                                      <a href="{{ path('list_reponses') }}" class="white-color align-btn">
+                                          Back to the list
+                                      </a>
+                                  </div>
+                                  <br>
+                                  <div class="btn btn-xs btn-danger margin-top">
+                                      <a href="{{ path('reponse_edit', { 'id': entity.id }) }}" class="white-color align-btn">
+                                          Edit
+                                      </a>
+                                  </div>
+                                  <br>
+
+                                 <div class="btn btn-xs btn-danger margin-top">{{ form(delete_form) }}</div>
+                              </div>
+                          </div>
+                          <table class="table table-hover personal-task">
+                              <tbody>
+                                <tr>
+                                    <td>
+                                        <i class=" fa fa-tasks"></i>
+                                    </td>
+                                    <td>Identifiant</td>
+                                    <td>{{ entity.id }}</td>
+                                </tr>
+                                <tr>
+                                   <td>
+                                        <i class="fa fa-exclamation-triangle"></i>
+                                    </td>
+                                    <td>Contenu</td>
+                                    <td>{{ entity.contenu }}</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <i class=" fa fa-bell-o"></i>
+                                    </td>
+                                    <td>Auteur</td>
+                                    <td>{{ entity.usersHermes }}</td>
+                                </tr>
+                              </tbody>
+                          </table>
+                      </section>
+{#
+   
+    <h1>User</h1>
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <th>username</th>
+                <th>Adresse mail</th>
+            </tr>
+             <tr>
+                <td>{{ entity.id }}</td>
+                <td>{{ entity.username }}</td>
+                <td>{{ entity.email }}</td>
+            </tr>
+        </tbody>
+    </table>
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('user_list') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('user_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+#}
+
+{% endblock %}
+
+
+
+
+
+
+
+

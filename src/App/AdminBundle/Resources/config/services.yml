@@ -1,0 +1,16 @@
+services:
+    app.adminbundle.user.form.type:
+        class: App\AdminBundle\Form\UserType
+        arguments:
+            - "@service_container"
+        tags:
+            - { name: form.type, alias: app_adminbundle_user }
+            
+    fm_elfinder:
+        class: App\AdminBundle\Form\UserType
+        connector:
+            roots:
+                uploads:
+                    driver: elfinder.driver.filesystem
+                    path: uploads
+            

@@ -1,0 +1,69 @@
+<aside>
+          <div id="sidebar"  class="nav-collapse ">
+              <!-- sidebar menu start-->
+              <ul class="sidebar-menu" id="nav-accordion">
+                  <li>
+                      <a class="active" href="{{ path('admin_dash') }}">
+                          <i class="fa fa-dashboard"></i>
+                          <span>Tableau de bord</span>
+                      </a>
+                  </li>
+                  <li class="sub-menu">
+                      <a href="{{ path ('user_list') }}" >
+                          <i class="fa fa-laptop"></i>
+                          <span>Gerer les administrateurs</span>
+                      </a>
+                  </li>
+                  <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-tasks"></i>
+                          <span>Gestion des medias</span>
+                      </a>
+                  </li>
+                  <li class="sub-menu">
+                      <a href="{{ path ('users_hermes_list') }}" >
+                          <i class="fa fa-th"></i>
+                          <span>Liste des utilisateurs</span>
+                      </a>
+                  </li>
+                  <li class="sub-menu">
+                      <a href="{{ path ('list_questions') }}" >
+                          <i class="fa fa-glass"></i>
+                          <span>Liste des questions</span>
+                      </a>
+                  </li>
+                  <li>
+                      <a  href="{{ path('list_reponses') }}">
+                          <i class="fa fa-user"></i>
+                          <span>Liste des réponses</span>
+                      </a>
+                  </li>
+                  
+                  <!--multi level menu start-->
+                  <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-sitemap"></i>
+                          <span>Se déconnecter</span>
+                      </a>
+                      <ul class="sub">
+                          <li><a  href="javascript:;">Menu Item 1</a></li>
+                          <li class="sub-menu">
+                              <a  href="boxed_page.html">Menu Item 2</a>
+                              <ul class="sub">
+                                  <li><a  href="javascript:;">Menu Item 2.1</a></li>
+                                  <li class="sub-menu">
+                                      <a  href="javascript:;">Menu Item 3</a>
+                                      <ul class="sub">
+                                          <li><a  href="javascript:;">Menu Item 3.1</a></li>
+                                          <li><a  href="javascript:;">Menu Item 3.2</a></li>
+                                      </ul>
+                                  </li>
+                              </ul>
+                          </li>
+                      </ul>
+                  </li>
+                  <!--multi level menu end-->
+              </ul>
+          </div>
+      </aside>
+      

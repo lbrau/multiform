@@ -1,0 +1,36 @@
+{% extends 'AppAdminBundle:Layout:admin_layout.html.twig' %}
+{% form_theme edit_form 'AppAdminBundle:Form:fields.html.twig' %}
+
+{% block body %}
+    
+<div class="row">
+   <div class="col-lg-12">
+       <section class="panel">
+           <header class="panel-heading">
+               Édition de l'utilisateur Hermes
+           </header>
+          <div class="panel-body">
+            <form method="post" class="form-horizontal tasi-form" action="{{ path ('user_update', {'id' : entity.id}) }}">
+
+               {{ form_widget(edit_form.nom, { 'attr': {'class': 'tinymce'} }) }}
+               {{ form_widget(edit_form.prenom, { 'attr': {'class': 'tinymce'} }) }}
+               {{ form_widget(edit_form.email, { 'attr': {'class': 'tinymce'} }) }}
+               {{ form_widget(edit_form.reponses, { 'attr': {'class': 'tinymce'} }) }}
+            </form>
+           </div>
+            <ul class="record_actions">
+               <li>
+                   <a href="{{ path('users_hermes_list') }}">
+                       Back to the list
+                   </a>
+                   
+               </li>
+            </ul>
+      
+       </section>
+   </div>
+</div>
+{% endblock %}
+
+
+
