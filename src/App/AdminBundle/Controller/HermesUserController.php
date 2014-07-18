@@ -168,7 +168,7 @@ class HermesUserController extends Controller
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', 'submit', array('label' => 'Modifier'));
 
         return $form;
     }
@@ -196,9 +196,9 @@ class HermesUserController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('hermesuser_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('users_hermes_list', array('id' => $id)));
         }
-
+        
         return array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),

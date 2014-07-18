@@ -10,12 +10,9 @@
                Édition de l'utilisateur Hermes
            </header>
           <div class="panel-body">
-            <form method="post" class="form-horizontal tasi-form" action="{{ path ('user_update', {'id' : entity.id}) }}">
+            <form method="post" class="form-horizontal tasi-form" action="{{ path ('hermesuser_update', {'id' : entity.id}) }}">
 
-               {{ form_widget(edit_form.nom, { 'attr': {'class': 'tinymce'} }) }}
-               {{ form_widget(edit_form.prenom, { 'attr': {'class': 'tinymce'} }) }}
-               {{ form_widget(edit_form.email, { 'attr': {'class': 'tinymce'} }) }}
-               {{ form_widget(edit_form.reponses, { 'attr': {'class': 'tinymce'} }) }}
+               {{ form(edit_form) }}
             </form>
            </div>
             <ul class="record_actions">
