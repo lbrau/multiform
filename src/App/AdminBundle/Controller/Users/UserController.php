@@ -49,9 +49,9 @@ class UserController extends Controller
         $entity = new User();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
-    /*    
+     
         $data = $request->get($form->getName(), array());
-        $user  = $em->getRepository('FOSUserBundle:User')->findOneBy(array('email' => $data["email"]));
+        /*   $user  = $em->getRepository('FOSUserBundle:User')->findOneBy(array('email' => $data["email"]));
         if ($user) {
            var_dump('HELL');
             $form->get('email')->addError(new FormError('Cet email est déjà existant'));
@@ -63,7 +63,8 @@ class UserController extends Controller
         }
 */
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+            $entity->setUsernameCanonical($data["username"]);
+            $entity->setEmailCanonical($data["email"]);
             $em->persist($entity);
             $em->flush();
 

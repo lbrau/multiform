@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Doctrine\ORM\EntityRepository;
+use Symfony\Component\Validator\Constraints;
 
 class UserType extends AbstractType
 {
@@ -21,8 +22,15 @@ class UserType extends AbstractType
             ->add('enabled', 'checkbox', array('required' => false))
             ->add('username')
             ->add('email')
-            ->add('password', 'password', array('required' => false))
-            ->add('plainPassword', 'password', array('required' => false))
+            ->add('plainPassword', 'repeated', array(
+                    'type' => 'password',
+                    'first_options' => array('label' => 'Mot de passe'),
+                    'second_options' => array('label' => 'Confirmer le mot de passe'),
+                    'invalid_message' => 'Les mots de passe ne correspondent pas.',
+            		'constraints' => array(
+            				new Constraints\NotBlank(),
+            		),
+            ))
             ->add('groups','entity', array(
                 'class' => 'AppAdminBundle:Group',
                 'property' => 'name',
