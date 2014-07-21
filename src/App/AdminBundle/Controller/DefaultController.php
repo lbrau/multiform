@@ -14,9 +14,6 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-       var_dump("coucou");
-       
-       phpinfo();
         return array('name' => "");
     }
     
@@ -28,8 +25,4 @@ class DefaultController extends Controller
     {
         return array('name' => "");
     }
-    
-    
-    
-    
 }

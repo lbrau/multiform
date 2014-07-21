@@ -235,7 +235,7 @@ class QuestionController extends Controller
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('question'));
+        return $this->redirect($this->generateUrl('list_questions'));
     }
 
     /**

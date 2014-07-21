@@ -234,7 +234,7 @@ class ReponseController extends Controller
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('reponse'));
+        return $this->redirect($this->generateUrl('list_reponses'));
     }
 
     /**

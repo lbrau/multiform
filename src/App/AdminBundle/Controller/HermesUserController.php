@@ -238,7 +238,7 @@ class HermesUserController extends Controller
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('hermesuser'));
+        return $this->redirect($this->generateUrl('users_hermes_list'));
     }
 
     /**
