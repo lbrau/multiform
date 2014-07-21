@@ -8,9 +8,9 @@ use Doctrine\ORM\Mapping as ORM;
  * Question
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="App\AdminBundle\Entity\QuestionRepository")
+ * @ORM\Entity(repositoryClass="App\AdminBundle\Entity\QuestionTypeRepository")
  */
-class Question
+class QuestionType
 {
    /**
     * @var integer
@@ -20,15 +20,10 @@ class Question
     * @ORM\GeneratedValue(strategy="AUTO")
     */
    private $id;
-    
+
    /**
-   * @ORM\OneToOne(targetEntity="App\AdminBundle\Entity\Reponse")
-   */
-    private $reponse;
-    
-   /**
-   * @ORM\ManyToMany(targetEntity="App\AdminBundle\Entity\Langue", inversedBy="questions")
-   * @ORM\JoinTable(name="question_langue")
+   * @ORM\ManyToMany(targetEntity="App\AdminBundle\Entity\Langue", inversedBy="questionstype")
+   * @ORM\JoinTable(name="questiontype_langue")
    */
     private $langues;
 
@@ -49,9 +44,9 @@ class Question
     /**
      * @var integer
      *
-     * @ORM\Column(name="type", type="integer")
+     * @ORM\Column(name="value", type="integer")
      */
-    private $type;
+    private $value;
 
     public function __construct() {
         $this->langues = new \Doctrine\Common\Collections\ArrayCollection();
@@ -99,7 +94,6 @@ class Question
     public function setReponse(\App\AdminBundle\Entity\Reponse $reponse = null)
     {
         $this->reponse = $reponse;
-
         return $this;
     }
 
@@ -146,19 +140,4 @@ class Question
         return $this->langues;
     }
 
-    /**
-     * @param int $type
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-    }
-
-    /**
-     * @return int
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
 }

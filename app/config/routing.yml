@@ -6,8 +6,8 @@ app_admin:
 root:
     pattern: /
     defaults:
-        _controller: FrameworkBundle:Redirect:urlRedirect
-        path: /admin
+        _controller: AppAdminBundle:Question:index
+        path: /
         permanent: true
 
 fos_user_security:

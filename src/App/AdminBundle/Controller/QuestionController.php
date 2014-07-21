@@ -13,32 +13,43 @@ use App\AdminBundle\Form\QuestionType;
 /**
  * Question controller.
  *
- * @Route("/question")
+ * @Route("/admin/question")
  */
 class QuestionController extends Controller
 {
 
     /**
-     * Lists all Question entities.
+     * Liste des questions par langue
      *
-     * @Route("/", name="list_questions")
+     * @Route("/list/{lang_id}", name="list_questions")
      * @Method("GET")
      * @Template()
      */
-    public function indexAction()
+    public function indexAction($lang_id = 1)
     {
         $em = $this->getDoctrine()->getManager();
+        $langues = $em->getRepository('AppAdminBundle:Langue')->findAll();
 
-        $entities = $em->getRepository('AppAdminBundle:Question')->findAll();
+        //Sélection de la langue en fonction du paramètre id (sélecteur en BO)
+        $selectlangue = $em->getRepository('AppAdminBundle:Langue')->find($lang_id);
+
+        // Chargement des questions en fonction de la première langue sélectionnée
+        if($selectlangue) {
+           $questions = $em->getRepository('AppAdminBundle:Question')->findBy(array('id' => 1 ));
+        } else {
+            $questions = null;
+        }
 
         return array(
-            'entities' => $entities,
+            'langues' => $langues,
+            'selectlangue' => $selectlangue,
+            'questions' => $questions
         );
     }
     /**
      * Creates a new Question entity.
      *
-     * @Route("/", name="question_create")
+     * @Route("/creer/{lang_id}", name="question_create")
      * @Method("POST")
      * @Template("AppAdminBundle:Question:new.html.twig")
      */
@@ -89,11 +100,11 @@ class QuestionController extends Controller
     /**
      * Displays a form to create a new Question entity.
      *
-     * @Route("/new", name="question_new")
+     * @Route("/ajouter/{lang_id}", name="question_new")
      * @Method("GET")
      * @Template()
      */
-    public function newAction()
+    public function newAction($lang_id)
     {
         $entity = new Question();
         $form   = $this->createCreateForm($entity);
@@ -101,6 +112,7 @@ class QuestionController extends Controller
         return array(
             'entity' => $entity,
             'form'   => $form->createView(),
+            'lang_id' => $$lang_id
         );
     }
 

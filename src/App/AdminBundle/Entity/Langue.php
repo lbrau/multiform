@@ -20,25 +20,36 @@ class Langue
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-    
-   /**
-   * @ORM\ManyToOne(targetEntity="App\AdminBundle\Entity\Question")
-   */
-    private $question;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="langage", type="string", length=50)
+     * @ORM\Column(name="libelle", type="string", length=50)
      */
-    private $langage;
+    private $libelle;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="Contenu", type="string", length=255)
+    * @var string
+    *
+    * @ORM\Column(name="code", type="string", length=50)
+    *
+    */
+    private $code;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\AdminBundle\Entity\Question", mappedBy="langues")
      */
-    private $contenu;
+    private $questions;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\AdminBundle\Entity\QuestionType", mappedBy="langues")
+     */
+    private $questionstype;
+
+
+    public function __construct() {
+        $this->questions = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
 
     /**
@@ -52,48 +63,67 @@ class Langue
     }
 
     /**
-     * Set langage
-     *
-     * @param string $langage
-     * @return Langue
+     * @param string $code
      */
-    public function setLangage($langage)
+    public function setCode($code)
     {
-        $this->langage = $langage;
-
-        return $this;
+        $this->code = $code;
     }
 
     /**
-     * Get langage
-     *
-     * @return string 
+     * @return string
      */
-    public function getLangage()
+    public function getCode()
     {
-        return $this->langage;
+        return $this->code;
     }
 
     /**
-     * Set contenu
-     *
-     * @param string $contenu
-     * @return Langue
+     * @param string $libelle
      */
-    public function setContenu($contenu)
+    public function setLibelle($libelle)
     {
-        $this->contenu = $contenu;
-
-        return $this;
+        $this->libelle = $libelle;
     }
 
     /**
-     * Get contenu
-     *
-     * @return string 
+     * @return string
      */
-    public function getContenu()
+    public function getLibelle()
     {
-        return $this->contenu;
+        return $this->libelle;
     }
+
+    /**
+     * @param mixed $questions
+     */
+    public function setQuestions($questions)
+    {
+        $this->questions = $questions;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getQuestions()
+    {
+        return $this->questions;
+    }
+
+    /**
+     * @param mixed $questionstype
+     */
+    public function setQuestionstype($questionstype)
+    {
+        $this->questionstype = $questionstype;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getQuestionstype()
+    {
+        return $this->questionstype;
+    }
+
 }

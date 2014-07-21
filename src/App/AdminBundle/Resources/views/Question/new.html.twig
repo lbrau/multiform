@@ -1,15 +1,10 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Question creation</h1>
+    <h1>Ajouter une question</h1>
 
-    {{ form(form) }}
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('list_questions') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+    <form method="post" class="cmxform form-horizontal tasi-form" action="{{ path ('question_create', { 'lang_id' : lang_id}) }}">
+        {{ form(form) }}
+    </form>
 {% endblock %}
