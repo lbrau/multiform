@@ -18,7 +18,6 @@ class HermesUserType extends AbstractType
             ->add('nom')
             ->add('prenom')
             ->add('email')
-            ->add('reponses')
         ;
     }
     
