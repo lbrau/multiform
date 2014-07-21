@@ -15,6 +15,8 @@ class DefaultController extends Controller
     public function indexAction()
     {
        var_dump("coucou");
+       
+       phpinfo();
         return array('name' => "");
     }
     
