@@ -9,13 +9,13 @@
                Création d'un utilisateur Hermes
            </header>
           <div class="panel-body">
-            <form method="post" class="form-horizontal tasi-form" action="{{ path ('user_list') }}">
+            <form method="post" class="form-horizontal tasi-form" action="{{ path ('users_hermes_list') }}">
               {{ form(form) }}
           </div>
             </form>
             <ul class="record_actions">
                <li>
-                   <a href="{{ path('hermesuser') }}">
+                   <a href="{{ path('users_hermes_list') }}">
                        Back to the list
                    </a>
                </li>
